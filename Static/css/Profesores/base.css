@@ -1,0 +1,16 @@
+
+#ContainerBody{
+    background-color:#F5F5F5;
+    border: 1px solid #c8d6e8;
+    border-radius: 9px;
+    
+
+    height: 100%;
+
+    margin: 15px 15px 0px 15px;
+
+    padding: 10px 10px ;
+    
+    box-shadow: 10px 10px 10px -5px gray;
+
+}

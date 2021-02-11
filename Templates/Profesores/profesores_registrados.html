@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head_content %}
+<title>Educadoras</title>
+{% endblock %}
+
+
+{% block container %}
+
+<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+
+    <div class="btn-group" role="group" aria-label="First group">
+
+        <button type="button" class="btn btn-outline-primary"
+            onclick="abrir_modal_profesor('{% url 'educadoras:create' %}');"> Ingresar
+            nueva Educadora </button>
+
+    </div>
+
+    <div class="input-group">
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </div>
+</div>
+
+<br>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Rut</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Opción</th>
+        </tr>
+    </thead>
+    <tbody> 
+        {% for profesor in profesores %}
+        <tr>
+            <th scope="row">{{profesor.rut_teacher}}</th>
+            <td>{{profesor.first_name_teacher}} {{profesor.last_name_teacher}}</td>
+            <td>{{profesor.phone_number_teacher}}</td>
+            <td>{{profesor.email_teacher}}</td>
+            <td>
+                <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i> </button>
+                <button type="button" class="btn btn-outline-warning"
+                    onclick="abrir_modal_profesor('{% url 'educadoras:update' profesor.id %}');"><i
+                        class="fas fa-user-edit"></i>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="modal" id="Creacion_Educador" tabindex="-1"></div>
+
+{% endblock %}
+
+{% block extra_script %}
+
+<script src="{% static 'js/Profesores/profesores.js' %}"></script>
+
+{% endblock %}
+
+<!--
+ <a class="btn btn-outline-warning" href="{% url 'educadoras:update' profesor.id %}"><i
+                        class="fas fa-user-edit"></i> </a>
+
+                        <a class="btn btn-outline-danger" href="{% url 'educadoras:delete' profesor.id  %}">
+                            <i class="fas fa-trash"></i> </a>
+
+-->

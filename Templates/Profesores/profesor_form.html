@@ -1,0 +1,23 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Registro Educador/a</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form id="create_form" action="{% url 'educadoras:create' %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div id="errores">
+
+                </div>
+                {{ form.as_p }}
+            </div>
+        </form>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="cerrar_modal_profesor();">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="boton_creacion" onclick="registrar();">Guardar</button>
+        </div>
+    </div>
+</div>

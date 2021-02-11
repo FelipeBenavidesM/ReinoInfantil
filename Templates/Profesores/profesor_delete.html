@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head_content %}
+<title>Eliminar Educador/a</title>
+{% endblock %}
+
+{% block container %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Educador/a</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estas seguro/a que desea eliminar el registro de
+                    <b>{{profesor.first_name_teacher}} {{profesor.last_name_teacher}}</b>
+                    ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" href="{% url 'educadoras:list' %}"> Cerrar</a>
+                <button type="submit" class="btn btn-danger">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

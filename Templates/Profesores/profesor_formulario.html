@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_content %}
+<title>registrar Educador/a</title>
+{% endblock %}
+
+{% block container %}
+<h2 style='text-align: center'><b> Registrar Nuevo/a Educador/a </b></h2><br>
+<form method='POST'>
+    {% csrf_token %}
+    <div class="form-row justify-content-center">
+        <div class="form-group col-md-6 ">
+            {{ form.rut_teacher.label}}
+            {{ form.rut_teacher }}
+            {% for error in form.errors.rut_teacher %} <label style="color:red">{{ error }}</label>{% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row ">
+        <div class="form-group col-md-6 ">
+            {{ form.first_name_teacher.label}}
+            {{ form.first_name_teacher }}
+            {% for error in form.errors.first_name_teacher %} <label style="color:red">{{ error }}</label>{% endfor %}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.last_name_teacher.label}}
+            {{ form.last_name_teacher }}
+            {% for error in form.errors.last_name_teacher %} <label style="color:red">{{ error }}</label>{% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.phone_number_teacher.label}}
+            {{ form.phone_number_teacher }}
+            {% for error in form.errors.phone_number_teacher %}<label style="color:red">{{ error }}{% endfor %}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.email_teacher.label}}
+            {{ form.email_teacher }}
+            {% for error in form.errors.email_teacher %} <label style="color:red">{{ error }}</label>{% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            {{ form.address_teacher.label}}
+            {{ form.address_teacher }}
+            {% for error in form.errors.address_teacher %} <label style="color:red">{{ error }}</label>{% endfor %}
+        </div>
+
+    </div>
+
+    <div class="form-group d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary ">Guardar</button>
+    </div>
+
+</form>
+
+{% endblock %}

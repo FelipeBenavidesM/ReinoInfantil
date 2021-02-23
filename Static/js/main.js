@@ -1,14 +1,13 @@
+
 function abrir_modal_profesor(url) {
-    $('#Creacion_Educador').load(url, function () {
+    $('#Educadora').load(url, function () {
         $(this).modal('show');
     });
 }
 
-
 function cerrar_modal_profesor() {
-    $('#Creacion_Educador').modal('hide');
+    $('#Educadora').modal('hide');
 }
-
 
 function activarBoton() {
     if ($('#boton_creacion').prop('disabled')) {
@@ -17,6 +16,7 @@ function activarBoton() {
         $('#boton_creacion').prop('disabled', true);
     }
 }
+
 
 function mostrarError(errores) {
     //input del rut
@@ -30,8 +30,6 @@ function mostrarError(errores) {
     errores.responseJSON.error.rut_teacher = " "
     errors += "</label>"
     $('#inputRut').after(errors);
-
-
 
 
     //input del nombre

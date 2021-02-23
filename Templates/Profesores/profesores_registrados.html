@@ -12,17 +12,20 @@
 <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 
     <div class="btn-group" role="group" aria-label="First group">
-
         <button type="button" class="btn btn-outline-primary"
             onclick="abrir_modal_profesor('{% url 'educadoras:create' %}');"> Ingresar
             nueva Educadora </button>
-
     </div>
 
-    <div class="input-group">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </div>
+    <form action="{% url 'educadoras:filter' %}" method="GET">
+        {% csrf_token %}
+        <div class="input-group">
+            <input class="form-control mr-sm-2" type="search" name='buscar' value="" placeholder="Buscar"
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </div>
+    </form>
+
 </div>
 
 <br>
@@ -37,7 +40,7 @@
             <th scope="col">Opción</th>
         </tr>
     </thead>
-    <tbody> 
+    <tbody>
         {% for profesor in profesores %}
         <tr>
             <th scope="row">{{profesor.rut_teacher}}</th>
@@ -45,10 +48,13 @@
             <td>{{profesor.phone_number_teacher}}</td>
             <td>{{profesor.email_teacher}}</td>
             <td>
-                <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i> </button>
+                <button type="button" class="btn btn-outline-danger"
+                    onclick="abrir_modal_profesor('{% url 'educadoras:delete' profesor.id %}');">
+                    <i class="fas fa-trash"></i> </button>
+
                 <button type="button" class="btn btn-outline-warning"
-                    onclick="abrir_modal_profesor('{% url 'educadoras:update' profesor.id %}');"><i
-                        class="fas fa-user-edit"></i>
+                    onclick="abrir_modal_profesor('{% url 'educadoras:update' profesor.id %}');">
+                    <i class="fas fa-user-edit"></i>
                 </button>
             </td>
         </tr>
@@ -56,7 +62,8 @@
     </tbody>
 </table>
 
-<div class="modal" id="Creacion_Educador" tabindex="-1"></div>
+<div class="modal" id="Educadora" tabindex="-1"></div>
+
 
 {% endblock %}
 
@@ -65,12 +72,3 @@
 <script src="{% static 'js/Profesores/profesores.js' %}"></script>
 
 {% endblock %}
-
-<!--
- <a class="btn btn-outline-warning" href="{% url 'educadoras:update' profesor.id %}"><i
-                        class="fas fa-user-edit"></i> </a>
-
-                        <a class="btn btn-outline-danger" href="{% url 'educadoras:delete' profesor.id  %}">
-                            <i class="fas fa-trash"></i> </a>
-
--->

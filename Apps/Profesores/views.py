@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, FormView, UpdateView, DeleteView
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+from django.db.models import Q
 # models
 from Apps.Profesores.models import Profesor
 
@@ -15,12 +16,21 @@ class ProfesorList(ListView):
     model = Profesor
     template_name = 'Profesores/profesores_registrados.html'
     context_object_name = 'profesores'
-    queryset = Profesor.objects.filter(status_teacher=True)
+    queryset = Profesor.objects.filter(status_teacher=True).order_by('-created_teacher')
 
+class ProfesorFilter(ListView):
+    model = Profesor
+    
+    def get(self, request, *args, **kwargs):
+        result = request.GET.get('buscar')
+        query = Profesor.objects.filter(Q(status_teacher=True),
+        Q(rut_teacher = result) | Q(first_name_teacher = result) | Q(last_name_teacher = result))
+        return render(request,'Profesores/profesores_registrados.html',{'profesores': query})
 
 class ProfesorCreate(CreateView):
     model = Profesor
     template_name = 'Profesores/profesor_form.html'
+    context_object_name = 'profesor'
     form_class = ProfesorForm
 
     def post(self, request, *args, **kwargs):
@@ -58,10 +68,27 @@ class ProfesorCreate(CreateView):
 
 class ProfesorUpdate(UpdateView):
     model = Profesor
-    template_name = 'Profesores/profesor_formulario.html'
+    template_name = 'Profesores/profesor_form.html'
     form_class = ProfesorForm
-    success_url = reverse_lazy('educadoras:list')
-
+    
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            form = self.form_class(request.POST, instance=self.get_object())
+            if form.is_valid():
+                form.save()
+                mensaje = f'{self.model.__name__} actualizado correctamente!'
+                error = 'No hay error!'
+                response = JsonResponse({'mensaje': mensaje, 'error': error})
+                response.status_code = 201
+                return response
+            else:
+                mensaje = f'{self.model.__name__} no se ha podido actualizar!'
+                error = form.errors
+                response = JsonResponse({'mensaje': mensaje, 'error': error})
+                response.status_code = 400
+                return response
+        else:
+            return redirect('educadoras: list')
 
 class ProfesorDelete(DeleteView):
     model = Profesor
@@ -69,8 +96,17 @@ class ProfesorDelete(DeleteView):
     context_object_name = 'profesor'
     success_url = reverse_lazy('educadoras:list')
 
-    def post(self, request, pk, *args, **kwars):
-        object = Profesor.objects.get(pk=pk)
-        object.status_teacher = False
-        object.save()
+
+    def delete(self,request,pk,*args,**kwars):
+        if request.is_ajax():
+            profesor = self.get_object()
+            profesor.status_teacher = False
+            profesor.save()
+
+            mensaje = f'{self.model.__name__} eliminado correctamente!'
+            error = 'No hay error!'
+            response = JsonResponse({'mensaje': mensaje, 'error': error})
+            response.status_code = 201
+            return response
+
         return redirect('educadoras:list')

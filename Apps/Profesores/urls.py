@@ -15,6 +15,12 @@ urlpatterns = [
     ),
 
     path(
+        route='Filter/',
+        view=views.ProfesorFilter.as_view(),
+        name='filter'
+    ),
+
+    path(
         route='Create/',
         view=views.ProfesorCreate.as_view(),
         name='create'

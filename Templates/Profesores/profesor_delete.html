@@ -1,35 +1,26 @@
-{% extends "base.html" %}
-{% load static %}
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
+        <div class="modal-header">
+            <h5 class="modal-title">Eliminar Educador/a</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
-{% block head_content %}
-<title>Eliminar Educador/a</title>
-{% endblock %}
+        <div class="modal-body">
+            {% csrf_token %}
+            <p>¿Estas seguro/a que desea eliminar el registro de
+                <b>{{profesor.first_name_teacher}} {{profesor.last_name_teacher}}
+                </b>
+                ?
+            </p>
+        </div>
 
-{% block container %}
-
-
-<form method="POST">
-    {% csrf_token %}
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Educador/a</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>¿Estas seguro/a que desea eliminar el registro de
-                    <b>{{profesor.first_name_teacher}} {{profesor.last_name_teacher}}</b>
-                    ?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-secondary" href="{% url 'educadoras:list' %}"> Cerrar</a>
-                <button type="submit" class="btn btn-danger">Aceptar</button>
-            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" onclick="cerrar_modal_profesor();">Cerrar</button>
+            <button type="button" class="btn btn-danger" id="boton_creacion"
+                onclick="eliminar({{profesor.pk}});">Eliminar</button>
         </div>
     </div>
-</form>
-{% endblock %}
+</div>

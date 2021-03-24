@@ -5,8 +5,9 @@
 {% endblock %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand " href="#"><img src="{% static 'img/logo.png' %}" width="200" height="40"
-            style="padding-bottom: 5px; " loading="lazy"></a>
+    <a class="navbar-brand " href="{% url 'index:index' %}"><img src="{% static 'img/logo.png' %}" width="200" height="40"
+            style="padding-bottom: 5px; " loading="lazy" ></a>
+            
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -15,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto ml-5">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
                         class="fas fa-chalkboard-teacher"></i>
                     Educadoras
@@ -36,7 +37,7 @@
                     Alumnos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#"> <i class="fas fa-users"></i> Administrar Alumnos </a>
+                    <a class="dropdown-item" href="{% url 'alumnos:list' %}"> <i class="fas fa-users"></i> Administrar Alumnos </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"> <i class="far fa-clipboard"></i> Observaciones </a>
                 </div>

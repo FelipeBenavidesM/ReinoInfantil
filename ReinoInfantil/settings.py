@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     #local apps
     'Apps.Alumnos',
     'Apps.Profesores',
-    'Apps.Usuarios',    
+    'Apps.Usuarios',
+    'Apps.index',    
 ]
 
 MIDDLEWARE = [

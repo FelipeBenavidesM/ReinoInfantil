@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Registro Educador/a</h5>
+            <h4 class="modal-title">Registro Educador/a</h4>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -16,8 +16,9 @@
             </div>
         </form>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" onclick="cerrar_modal_profesor();">Cerrar</button>
-            <button type="button" class="btn btn-primary" id="boton_creacion" onclick="option({{profesor.pk}});">Guardar</button>
+            <button type="button" class="btn btn-danger" onclick="cerrar_modal();">Cerrar</button>
+            <button type="button" class="btn btn-info" id="boton_creacion"
+                onclick="option({{profesor.pk}});">Guardar</button>
         </div>
     </div>
 </div>

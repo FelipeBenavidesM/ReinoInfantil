@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, FormView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.db.models import Q
@@ -26,6 +26,7 @@ class ProfesorFilter(ListView):
         query = Profesor.objects.filter(Q(status_teacher=True),
         Q(rut_teacher = result) | Q(first_name_teacher = result) | Q(last_name_teacher = result))
         return render(request,'Profesores/profesores_registrados.html',{'profesores': query})
+
 
 class ProfesorCreate(CreateView):
     model = Profesor

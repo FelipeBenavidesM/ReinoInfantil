@@ -27,7 +27,8 @@ urlpatterns = [
     
     #path('', Home.as_view(), name='home'),
     path('Educadoras/', include(('Apps.Profesores.urls', 'Profesores'), namespace='educadoras')),
+    path('Alumnos/', include(('Apps.Alumnos.urls', 'Alumnos'), namespace='alumnos')),
+    path('', include(('Apps.index.urls', 'index'), namespace='index')),
     
-    
-    
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

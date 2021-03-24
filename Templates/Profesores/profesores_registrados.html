@@ -13,7 +13,7 @@
 
     <div class="btn-group" role="group" aria-label="First group">
         <button type="button" class="btn btn-outline-primary"
-            onclick="abrir_modal_profesor('{% url 'educadoras:create' %}');"> Ingresar
+            onclick="abrir_modal('{% url 'educadoras:create' %}');"> Ingresar
             nueva Educadora </button>
     </div>
 
@@ -49,11 +49,11 @@
             <td>{{profesor.email_teacher}}</td>
             <td>
                 <button type="button" class="btn btn-outline-danger"
-                    onclick="abrir_modal_profesor('{% url 'educadoras:delete' profesor.id %}');">
+                    onclick="abrir_modal('{% url 'educadoras:delete' profesor.id %}');">
                     <i class="fas fa-trash"></i> </button>
 
                 <button type="button" class="btn btn-outline-warning"
-                    onclick="abrir_modal_profesor('{% url 'educadoras:update' profesor.id %}');">
+                    onclick="abrir_modal('{% url 'educadoras:update' profesor.id %}');">
                     <i class="fas fa-user-edit"></i>
                 </button>
             </td>
@@ -62,7 +62,7 @@
     </tbody>
 </table>
 
-<div class="modal" id="Educadora" tabindex="-1"></div>
+<div class="modal" id="Modal" tabindex="-1"></div>
 
 
 {% endblock %}
